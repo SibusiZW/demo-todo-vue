@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import type { Task } from './types';
+import TaskDisplay from './components/TaskDisplay.vue';
 
   const newTask = ref<string>('');
   const tasks = ref<Task[]>([{
@@ -18,7 +19,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col p-6 space-y-5 items-center justify-center">
+  <div class="flex flex-col p-6 space-y-5 w-full">
     <h1 class="text-3xl text-green-500">Demo Todo App w/ Vue.js</h1>
 
     <h3>Your Tasks</h3>
@@ -29,5 +30,8 @@
       </div>
     </form>
     
+    <div v-for="task in tasks">
+      <TaskDisplay :task="task"/>
+    </div>
   </div>
 </template>
