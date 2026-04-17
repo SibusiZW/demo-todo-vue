@@ -1,11 +1,18 @@
 <script setup lang="ts">
     import type { Task } from '@/types';
 
+    const emit = defineEmits<{
+        (e: 'delete', value: number): void
+    }>()
+
     interface TaskDisplayProps {
         task: Task
     }
+    const props = defineProps<TaskDisplayProps>();
 
-    defineProps<TaskDisplayProps>();
+    function onDelete() {
+        emit('delete', props.task.id)
+    }
 </script>
 
 <template>
@@ -18,7 +25,7 @@
         </div>
 
         <div class="flex">
-            <button class="bg-red-600 mr-2 transition duration-500 hover:bg-red-300 text-white p-2 rounded-md">Delete</button>
+            <button @click="onDelete" class="bg-red-600 mr-2 transition duration-500 hover:bg-red-300 text-white p-2 rounded-md">Delete</button>
             <button class="bg-blue-600 transition duration-500 hover:bg-blue-300 text-white p-2 rounded-md">Toggle</button>
         </div>
     </div>

@@ -16,6 +16,10 @@ import TaskDisplay from './components/TaskDisplay.vue';
       newTask.value = '';
     }
   }
+  
+  function deleteTask(id: number) {
+    tasks.value = tasks.value.filter(t => t.id !== id)
+  }
 </script>
 
 <template>
@@ -31,7 +35,7 @@ import TaskDisplay from './components/TaskDisplay.vue';
     </form>
     
     <div v-for="task in tasks">
-      <TaskDisplay :task="task"/>
+      <TaskDisplay @delete="deleteTask" :task="task"/>
     </div>
   </div>
 </template>
