@@ -2,7 +2,8 @@
     import type { Task } from '@/types';
 
     const emit = defineEmits<{
-        (e: 'delete', value: number): void
+        (e: 'delete', value: number): void,
+        (e: 'toggle', value: number): void
     }>()
 
     interface TaskDisplayProps {
@@ -12,6 +13,10 @@
 
     function onDelete() {
         emit('delete', props.task.id)
+    }
+
+    function onToggle() {
+        emit('toggle', props.task.id)
     }
 </script>
 
@@ -26,7 +31,7 @@
 
         <div class="flex">
             <button @click="onDelete" class="bg-red-600 mr-2 transition duration-500 hover:bg-red-300 text-white p-2 rounded-md">Delete</button>
-            <button class="bg-blue-600 transition duration-500 hover:bg-blue-300 text-white p-2 rounded-md">Toggle</button>
+            <button @click="onToggle" class="bg-blue-600 transition duration-500 hover:bg-blue-300 text-white p-2 rounded-md">Toggle</button>
         </div>
     </div>
 </template>

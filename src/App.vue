@@ -20,6 +20,10 @@ import TaskDisplay from './components/TaskDisplay.vue';
   function deleteTask(id: number) {
     tasks.value = tasks.value.filter(t => t.id !== id)
   }
+
+  function toggleTask(id: number) {
+    tasks.value = tasks.value.map(t => (t.id === id) ? { ...t, completed: !t.completed } : t);
+  }
 </script>
 
 <template>
@@ -35,7 +39,7 @@ import TaskDisplay from './components/TaskDisplay.vue';
     </form>
     
     <div v-for="task in tasks">
-      <TaskDisplay @delete="deleteTask" :task="task"/>
+      <TaskDisplay @toggle="toggleTask" @delete="deleteTask" :task="task"/>
     </div>
   </div>
 </template>
